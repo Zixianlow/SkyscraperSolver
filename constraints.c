@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:04:03 by nsyazril          #+#    #+#             */
-/*   Updated: 2023/03/31 19:57:23 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:56:44 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ int	up_chk(t_sky *sky, int col)
 	r_tall = 0;
 	while (++r < sky->size)
 	{
-		if (sky->grid[r_tall * sky->size + col] < sky->grid[r * sky->size + col])
+		if (sky->grid[r_tall * sky->size + col]
+			< sky->grid[r * sky->size + col])
 		{
 			r_tall = r;
 			col_sight++;
 		}
 	}
 	if (sky->cond[col] == col_sight)
-	{
 		return (1);
-	}
-	else
-		return (0);
+	return (0);
 }
 
 int	down_chk(t_sky *sky, int col)
@@ -48,7 +46,8 @@ int	down_chk(t_sky *sky, int col)
 	r_tall = sky->size - 1;
 	while (--r >= 0)
 	{
-		if (sky->grid[r_tall * sky->size + col] < sky->grid[r * sky->size + col])
+		if (sky->grid[r_tall * sky->size + col]
+			< sky->grid[r * sky->size + col])
 		{
 			r_tall = r;
 			col_sight++;
@@ -56,8 +55,7 @@ int	down_chk(t_sky *sky, int col)
 	}
 	if (sky->cond[col + sky->size] == col_sight)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	right_chk(t_sky *sky, int row)
@@ -71,7 +69,8 @@ int	right_chk(t_sky *sky, int row)
 	c_tall = sky->size - 1;
 	while (--c >= 0)
 	{
-		if (sky->grid[row * sky->size + c_tall] < sky->grid[row * sky->size + c])
+		if (sky->grid[row * sky->size + c_tall]
+			< sky->grid[row * sky->size + c])
 		{
 			c_tall = c;
 			row_sight++;
@@ -79,8 +78,7 @@ int	right_chk(t_sky *sky, int row)
 	}
 	if (sky->cond[row + sky->size * 3] == row_sight)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	left_chk(t_sky *sky, int row)
@@ -94,7 +92,8 @@ int	left_chk(t_sky *sky, int row)
 	c_tall = 0;
 	while (++c < sky->size)
 	{
-		if (sky->grid[row * sky->size + c_tall] < sky->grid[row * sky->size + c])
+		if (sky->grid[row * sky->size + c_tall]
+			< sky->grid[row * sky->size + c])
 		{
 			c_tall = c;
 			row_sight++;
@@ -102,6 +101,5 @@ int	left_chk(t_sky *sky, int row)
 	}
 	if (sky->cond[row + sky->size * 2] == row_sight)
 		return (1);
-	else
-		return (0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 18:22:51 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/03/31 21:49:52 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/12 19:02:43 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,32 @@ int	ft_free_nums(t_sky *sky)
 	return (1);
 }
 
+void	ft_init_cond_grid(t_sky *sky)
+{
+	int	n;
+
+	n = -1;
+	while (sky->nums[++n])
+		sky->cond[n] = ft_atoi(sky->nums[n]);
+	n = 0;
+	while (n < sky->n)
+	{
+		sky->grid[n] = 0;
+		sky->max[n] = 0;
+		n++;
+	}
+}
+
 int	ft_number_count(char *s, t_sky *sky)
 {
 	int	n;
 
 	sky->nums = ft_split(s, ' ');
-	n = 0;
-	while (sky->nums[n])
+	n = -1;
+	while (sky->nums[++n])
 	{
 		if (!ft_numeric(sky->nums[n]))
 			return (ft_free_nums(sky));
-		n++;
 	}
 	if (!ft_isgood(n))
 		return (ft_free_nums(sky));
@@ -65,19 +80,7 @@ int	ft_number_count(char *s, t_sky *sky)
 	sky->grid = malloc(sizeof(int *) * sky->n);
 	sky->max = malloc(sizeof(int *) * sky->n);
 	sky->cond = malloc(sizeof(int *) * n);
-	n = 0;
-	while (sky->nums[n])
-	{
-		sky->cond[n] = ft_atoi(sky->nums[n]);
-		n++;
-	}
-	n = 0;
-	while (n < sky->n)
-	{
-		sky->grid[n] = 0;
-		sky->max[n] = 0;
-		n++;
-	}
+	ft_init_cond_grid(sky);
 	ft_free_nums(sky);
 	return (0);
 }
